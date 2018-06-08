@@ -38,11 +38,10 @@ class CountDownTextView : TextView, Runnable {
                 onTimeEndedListener?.onExpiration(it)
                 removeCallbacks(this)
             } else {
-
                 text = "${resources.getString(R.string.time_left)} ${TimeConvert.millisToTime(milis)}"
+                postDelayed(this, 1000)
             }
         }
-        postDelayed(this, 1000)
     }
 
     override fun onDetachedFromWindow() {

@@ -30,7 +30,7 @@ class MainPresenter @Inject constructor(
 
     fun initView(mainView: MainView) {
         this.mainView = mainView
-        mainView.initializeView()
+        this.mainView?.initializeView()
         getDeals()
     }
 

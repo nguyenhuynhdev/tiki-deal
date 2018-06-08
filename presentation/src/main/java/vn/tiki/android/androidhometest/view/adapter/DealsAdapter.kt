@@ -7,15 +7,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-
 import com.squareup.picasso.Picasso
-
 import vn.tiki.android.androidhometest.databinding.ItemDealBinding
 import vn.tiki.android.androidhometest.view.component.CountDownTextView
 import vn.tiki.domain.model.DealModel
+import javax.inject.Inject
 
-
-class DealsAdapter : RecyclerView.Adapter<DealsAdapter.DealViewHolder>() {
+class DealsAdapter @Inject constructor() : RecyclerView.Adapter<DealsAdapter.DealViewHolder>() {
 
     companion object {
 
@@ -30,7 +28,7 @@ class DealsAdapter : RecyclerView.Adapter<DealsAdapter.DealViewHolder>() {
         @BindingAdapter("android:text")
         @JvmStatic
         fun setPrice(textView: TextView, resource: Double) {
-            textView.text = "$resource $"
+            textView.text = "$$resource"
         }
 
         @SuppressLint("SetTextI18n")
@@ -78,7 +76,11 @@ class DealsAdapter : RecyclerView.Adapter<DealsAdapter.DealViewHolder>() {
                         override fun onExpiration(deal: DealModel) {
                             val index = deals.indexOf(deal)
                             deals.remove(deal)
-                            notifyItemRemoved(index)
+                            if (index == -1) {
+                                notifyDataSetChanged()
+                            } else {
+                                notifyItemRemoved(index)
+                            }
                             onDealItemClickListener?.onDealRemove()
                         }
                     }

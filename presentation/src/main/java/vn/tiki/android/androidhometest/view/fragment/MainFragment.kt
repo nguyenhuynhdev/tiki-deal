@@ -20,7 +20,8 @@ class MainFragment : BaseFragment(), MainView {
 
     @Inject
     lateinit var mainPresenter: MainPresenter
-    private val dealsAdapter = DealsAdapter()
+    @Inject
+    lateinit var dealsAdapter: DealsAdapter
     private lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
