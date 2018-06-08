@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="deals_is_empty"
+            type="boolean" />
+    </data>
 
     <android.support.constraint.ConstraintLayout
 
@@ -8,10 +18,27 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_view_deals"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recycle_view_deals">
+            android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>
+
+        <Button
+            android:id="@+id/btn_get_deals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorRed"
+            android:text="@string/get_deals"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:visibility="@{deals_is_empty? View.VISIBLE: View.GONE, default = visible}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </layout>

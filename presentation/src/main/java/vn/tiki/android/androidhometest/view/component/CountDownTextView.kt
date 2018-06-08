@@ -21,6 +21,7 @@ class CountDownTextView : TextView, Runnable {
     var deal: DealModel? = null
         set(value) {
             field = value
+            removeCallbacks(this)
             post(this)
         }
 

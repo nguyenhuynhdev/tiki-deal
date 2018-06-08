@@ -1,12 +1,11 @@
 package vn.tiki.android.androidhometest.presenter
 
-import javax.inject.Inject
-
-import vn.tiki.domain.model.DealModel
-import vn.tiki.domain.interactor.DefaultObserver
-import vn.tiki.android.androidhometest.view.MainView
-import vn.tiki.domain.interactor.usecase.GetDealsUseCase
 import vn.tiki.android.androidhometest.injection.scope.FragmentScope
+import vn.tiki.android.androidhometest.view.MainView
+import vn.tiki.domain.interactor.DefaultObserver
+import vn.tiki.domain.interactor.usecase.GetDealsUseCase
+import vn.tiki.domain.model.DealModel
+import javax.inject.Inject
 
 @FragmentScope
 class MainPresenter @Inject constructor(
@@ -32,6 +31,10 @@ class MainPresenter @Inject constructor(
     fun initView(mainView: MainView) {
         this.mainView = mainView
         mainView.initializeView()
+        getDeals()
+    }
+
+    fun getDeals() {
         getDealsUseCase.execute(GetDealsObserver(), null)
     }
 

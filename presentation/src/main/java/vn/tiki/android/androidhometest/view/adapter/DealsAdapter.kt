@@ -79,6 +79,7 @@ class DealsAdapter : RecyclerView.Adapter<DealsAdapter.DealViewHolder>() {
                             val index = deals.indexOf(deal)
                             deals.remove(deal)
                             notifyItemRemoved(index)
+                            onDealItemClickListener?.onDealRemove()
                         }
                     }
             itemDealBinding.executePendingBindings()
@@ -90,5 +91,7 @@ class DealsAdapter : RecyclerView.Adapter<DealsAdapter.DealViewHolder>() {
         fun onDealItemClick(name: String)
 
         fun onBuy(price: Double)
+
+        fun onDealRemove()
     }
 }

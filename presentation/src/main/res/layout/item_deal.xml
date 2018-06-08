@@ -5,6 +5,7 @@
     android:layout_margin="@dimen/_3sdp">
 
     <data>
+
         <variable
             name="deal"
             type="vn.tiki.domain.model.DealModel" />
@@ -35,10 +36,10 @@
                 android:id="@+id/txt_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
                 android:ellipsize="end"
                 android:lines="2"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
                 android:text="@{deal.productName}"
                 android:textSize="@dimen/_16sdp"
                 app:layout_constraintTop_toBottomOf="@+id/img_product" />
@@ -47,9 +48,9 @@
                 android:id="@+id/txt_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
                 android:lines="1"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
                 android:text="@{deal.productPrice}"
                 android:textAlignment="textStart"
                 android:textColor="@color/colorRed"
@@ -61,10 +62,10 @@
                 android:id="@+id/txt_countdown"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
                 android:lines="1"
                 android:paddingBottom="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
                 android:text="@{deal}"
                 android:textAlignment="textStart"
                 app:layout_constraintTop_toBottomOf="@id/txt_price" />
@@ -73,16 +74,17 @@
                 android:id="@+id/btn_buy"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
                 android:background="@color/colorRed"
                 android:text="@string/buy"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/_16sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txt_countdown" />
 
         </android.support.constraint.ConstraintLayout>
