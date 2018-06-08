@@ -7,7 +7,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+
 import com.squareup.picasso.Picasso
+
 import vn.tiki.android.androidhometest.databinding.ItemDealBinding
 import vn.tiki.android.androidhometest.view.component.CountDownTextView
 import vn.tiki.domain.model.DealModel
@@ -44,6 +46,7 @@ class DealsAdapter : RecyclerView.Adapter<DealsAdapter.DealViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
+    var onDealItemClickListener: OnDealItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DealViewHolder {
         val itemBinding = ItemDealBinding.inflate(
@@ -64,6 +67,12 @@ class DealsAdapter : RecyclerView.Adapter<DealsAdapter.DealViewHolder>() {
 
         fun bind(deal: DealModel) {
             itemDealBinding.deal = deal
+            itemDealBinding.dealCardViewContainer.setOnClickListener {
+                onDealItemClickListener?.onDealItemClick(deal.productName)
+            }
+            itemDealBinding.btnBuy.setOnClickListener {
+                onDealItemClickListener?.onBuy(deal.productPrice)
+            }
             itemDealBinding.txtCountdown.onTimeEndedListener =
                     object : CountDownTextView.OnTimeEndedListener {
                         override fun onExpiration(deal: DealModel) {
@@ -74,5 +83,12 @@ class DealsAdapter : RecyclerView.Adapter<DealsAdapter.DealViewHolder>() {
                     }
             itemDealBinding.executePendingBindings()
         }
+    }
+
+    interface OnDealItemClickListener {
+
+        fun onDealItemClick(name: String)
+
+        fun onBuy(price: Double)
     }
 }

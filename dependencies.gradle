@@ -20,13 +20,13 @@ ext {
     gradleLibs = [
             buildGradle    : create('com.android.tools.build', 'gradle', buildGradleVersion),
             kotlinGradle   : create('org.jetbrains.kotlin', 'kotlin-gradle-plugin', kotlinVersion),
-            objectboxGradle: create('io.objectbox', 'objectbox-gradle-plugin', objectboxVersion),
+//            objectboxGradle: create('io.objectbox', 'objectbox-gradle-plugin', objectboxVersion),
     ]
     //Project dependencies
     gradleDependencies = [
             create('classpath', gradleLibs.buildGradle),
             create('classpath', gradleLibs.kotlinGradle),
-            create('classpath', gradleLibs.objectboxGradle),
+//            create('classpath', gradleLibs.objectboxGradle),
     ]
 
     /***************************************MODULES BUILD******************************************/
@@ -34,7 +34,7 @@ ext {
     androidVersion = '27.1.1'
     lifecycleVersion = '1.1.1'
     databindingVersion = '1.3.3'
-    constraintLayoutVersion = '1.0.2'
+    constraintLayoutVersion = '1.1.0-beta4'
     androidLibs = [
             //View model libs
             viewModelRuntime   : create('android.arch.lifecycle', 'runtime', lifecycleVersion),

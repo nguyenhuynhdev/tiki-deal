@@ -3,7 +3,6 @@ package vn.tiki.android.androidhometest.view.fragment
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,9 +55,22 @@ class MainFragment : BaseFragment(), MainView {
     override fun initializeView() {
         binding.recycleViewDeals.layoutManager = GridLayoutManager(activity, 2)
         binding.recycleViewDeals.adapter = dealsAdapter
+        dealsAdapter.onDealItemClickListener = onDealItemClickListener
     }
 
     override fun updateDeals(deals: MutableList<DealModel>) {
         dealsAdapter.deals = deals
+    }
+
+    private val onDealItemClickListener = object : DealsAdapter.OnDealItemClickListener {
+
+        override fun onDealItemClick(name: String) {
+            showToastMessage(name)
+        }
+
+        override fun onBuy(price: Double) {
+            showToastMessage("$price $")
+        }
+
     }
 }

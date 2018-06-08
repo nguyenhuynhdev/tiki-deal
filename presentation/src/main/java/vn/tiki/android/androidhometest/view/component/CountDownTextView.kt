@@ -1,8 +1,10 @@
 package vn.tiki.android.androidhometest.view.component
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.TextView
+import vn.tiki.android.androidhometest.R
 import vn.tiki.android.androidhometest.util.TimeConvert
 import vn.tiki.domain.model.DealModel
 
@@ -27,6 +29,7 @@ class CountDownTextView : TextView, Runnable {
         post(this)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun run() {
         deal?.let {
             val milis = (it.endDate.time) - System.currentTimeMillis()
@@ -34,7 +37,8 @@ class CountDownTextView : TextView, Runnable {
                 onTimeEndedListener?.onExpiration(it)
                 removeCallbacks(this)
             } else {
-                text = TimeConvert.millisToTime(milis)
+
+                text = "${resources.getString(R.string.time_left)} ${TimeConvert.millisToTime(milis)}"
             }
         }
         postDelayed(this, 1000)
