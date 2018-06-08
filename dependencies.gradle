@@ -1,0 +1,174 @@
+ext {
+    //Application version
+    versionCode = 1
+    versionName = '1.0'
+    //Sdk version
+    minSdkVersion = 21
+    targetSdkVersion = 27
+    compileSdkVersion = 27
+    buildToolsVersion = '27.0.3'
+    //manifest - empty
+    //Namespace
+    applicationId = 'vn.tiki.android.androidhometest'
+    testInstrumentationRunner = 'android.support.test.runner.AndroidJUnitRunner'
+    //Settings
+    enableDataBinding = true
+    /***************************************PROJECT BUILD******************************************/
+    kotlinVersion = '1.2.41'
+    objectboxVersion = '1.5.0'
+    buildGradleVersion = '3.1.2'
+    gradleLibs = [
+            buildGradle    : create('com.android.tools.build', 'gradle', buildGradleVersion),
+            kotlinGradle   : create('org.jetbrains.kotlin', 'kotlin-gradle-plugin', kotlinVersion),
+            objectboxGradle: create('io.objectbox', 'objectbox-gradle-plugin', objectboxVersion),
+    ]
+    //Project dependencies
+    gradleDependencies = [
+            create('classpath', gradleLibs.buildGradle),
+            create('classpath', gradleLibs.kotlinGradle),
+            create('classpath', gradleLibs.objectboxGradle),
+    ]
+
+    /***************************************MODULES BUILD******************************************/
+    //Android libraries
+    androidVersion = '27.1.1'
+    lifecycleVersion = '1.1.1'
+    databindingVersion = '1.3.3'
+    constraintLayoutVersion = '1.0.2'
+    androidLibs = [
+            //View model libs
+            viewModelRuntime   : create('android.arch.lifecycle', 'runtime', lifecycleVersion),
+            viewModel          : create('android.arch.lifecycle', 'extensions', lifecycleVersion),
+            viewModelComplier  : create('android.arch.lifecycle', 'common-java8', lifecycleVersion),
+
+            cardView           : create('com.android.support', 'cardview-v7', androidVersion),
+            appCompat          : create('com.android.support', 'appcompat-v7', androidVersion),
+            recyclerView       : create('com.android.support', 'recyclerview-v7', androidVersion),
+            databindingLibrary : create('com.android.databinding', 'library', databindingVersion),
+            databindingAdapters: create('com.android.databinding', 'adapters', databindingVersion),
+            databinding        : create('com.android.databinding', 'compiler', buildGradleVersion),
+            constraintLayout   : create('com.android.support.constraint', 'constraint-layout',
+                    constraintLayoutVersion),
+
+    ]
+    //Other libraries
+    sdpVersion = '1.0.5'
+    gSonVersion = '2.8.2'
+    daggerVersion = '2.16'
+    rxJavaVersion = '2.1.7'
+    facebookVersion = '[4,5)'
+    javaxInjectVersion = '1'
+    picassoVersion = '2.71828'
+    rxAndroidVersion = '2.0.1'
+    hockeyAppVersion = '5.1.0'
+    leakCanaryVersion = '1.5.4'
+    kotlinPoetVersion = '0.5.0'
+    autoServicesVersion = '1.0-rc2'
+    libs = [
+            data              : project(':data'),
+            domain            : project(':domain'),
+            fileTree          : fileTree(dir: 'libs', include: ['*.jar']),
+            sdp               : create('com.intuit.sdp', 'sdp-android', sdpVersion),
+            gSon              : create('com.google.code.gson', 'gson', gSonVersion),
+            rxjava            : create('io.reactivex.rxjava2', 'rxjava', rxJavaVersion),
+            kotlinPoet        : create('com.squareup', 'kotlinpoet', kotlinPoetVersion),
+            picasso           : create('com.squareup.picasso', 'picasso', picassoVersion),
+            javaxInject       : create('javax.inject', 'javax.inject', javaxInjectVersion),
+            rxandroid         : create('io.reactivex.rxjava2', 'rxandroid', rxAndroidVersion),
+            hockeyAppSdk      : create('net.hockeyapp.android', 'HockeySDK', hockeyAppVersion),
+            kotlin            : create('org.jetbrains.kotlin', 'kotlin-stdlib', kotlinVersion),
+            leakCanary        : create('com.squareup.leakcanary', 'leakcanary-android',
+                    leakCanaryVersion),
+            //Object Box
+            objectboxKotlin   : create('io.objectbox', 'objectbox-kotlin', objectboxVersion),
+            objectboxAndroid  : create('io.objectbox', 'objectbox-android', objectboxVersion),
+            objectboxProcessor: create('io.objectbox', 'objectbox-processor', objectboxVersion),
+            //Dagger
+            dagger            : create('com.google.dagger', 'dagger', daggerVersion),
+            daggerCompiler    : create('com.google.dagger', 'dagger-compiler', daggerVersion),
+            daggerSupport     : create('com.google.dagger', 'dagger-android-support', daggerVersion),
+            daggerProcessor   : create('com.google.dagger', 'dagger-android-processor', daggerVersion),
+            //Other
+            autoService       : create('com.google.auto.service', 'auto-service', autoServicesVersion),
+    ]
+    //Test libraries
+    jUnitVersion = '4.12'
+    runnerVersion = '1.0.1'
+    dexmakerVersion = '2.2.0'
+    espressoVersion = '3.0.1'
+    mockitoVersion = '2.10.0'
+    testLibs = [
+            junit          : create('junit', 'junit', jUnitVersion),
+            mockito        : create('org.mockito', 'mockito-inline', mockitoVersion),
+            runner         : create('com.android.support.test', 'runner', runnerVersion),
+            daggerCompiler : create('com.google.dagger', 'dagger-compiler', daggerVersion),
+            kotlinTestJunit: create('org.jetbrains.kotlin', 'kotlin-test-junit', kotlinVersion),
+            dexmakerMockito: create('com.linkedin.dexmaker', 'dexmaker-mockito', dexmakerVersion),
+            espresso       : create('com.android.support.test.espresso', 'espresso-core',
+                    espressoVersion),
+    ]
+
+/***************************************MODULES DEPENDENCIES **************************************/
+    kapt = 'kapt'
+    implementation = 'implementation'
+
+    appDependencies = [
+            create(implementation, libs.fileTree),
+            //Custom library
+            create(implementation, libs.data),
+            create(implementation, libs.domain),
+            //Dagger 2
+            create(kapt, libs.daggerCompiler),
+            create(kapt, libs.daggerProcessor),
+            create(implementation, libs.dagger),
+            create(implementation, libs.daggerSupport),
+            //Other library
+            create(implementation, libs.sdp),
+            create(implementation, libs.gSon),
+            create(implementation, libs.kotlin),
+            create(implementation, libs.rxjava),
+            create(implementation, libs.picasso),
+            create(kapt, androidLibs.databinding),
+            create(implementation, libs.rxandroid),
+            create(implementation, libs.leakCanary),
+            create(implementation, libs.hockeyAppSdk),
+            create(implementation, androidLibs.cardView),
+            create(implementation, androidLibs.appCompat),
+            create(implementation, androidLibs.recyclerView),
+            create(implementation, androidLibs.constraintLayout),
+            create(implementation, androidLibs.constraintLayout),
+            create(implementation, androidLibs.databindingLibrary),
+            create(implementation, androidLibs.databindingAdapters),
+    ]
+    dataDependencies = [
+            create(implementation, libs.fileTree),
+            //Custom library
+            create(implementation, libs.domain),
+            //Other library
+            create(implementation, libs.gSon),
+            create(implementation, libs.kotlin),
+            create(implementation, libs.rxjava),
+            create(implementation, libs.rxandroid),
+            create(implementation, libs.javaxInject),
+    ]
+
+    domainDependencies = [
+            create(implementation, libs.fileTree),
+            //Custom library
+            //Other library
+            create(implementation, libs.kotlin),
+            create(implementation, libs.rxjava),
+            create(implementation, libs.rxandroid),
+            create(implementation, libs.javaxInject),
+    ]
+}
+
+/***************************************HELPER FUNCTIONS*******************************************/
+
+static create(_group, _name, _version) {
+    return [group: _group, name: _name, version: _version]
+}
+
+static create(_configuration, _dependency) {
+    return [configuration: _configuration, dependency: _dependency]
+}

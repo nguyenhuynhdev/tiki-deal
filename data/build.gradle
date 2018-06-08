@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+def settings = rootProject.extensions.getByName("ext")
+
+android {
+    setCompileSdkVersion(settings.compileSdkVersion)
+    setBuildToolsVersion(settings.buildToolsVersion)
+
+    defaultConfig {
+        minSdkVersion settings.minSdkVersion
+        targetSdkVersion settings.targetSdkVersion
+        testInstrumentationRunner settings.testInstrumentationRunner
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    settings.dataDependencies.each {
+        add(it.configuration, it.dependency)
+    }
+    implementation 'com.android.support:support-annotations:27.1.1'
+}
